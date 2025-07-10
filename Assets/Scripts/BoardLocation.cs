@@ -20,8 +20,9 @@ public class BoardLocation : MonoBehaviour
             
             if (otherPiece.isDragging)
                 return;
-            
-            otherPiece.inPlay = true;
+
+            otherPiece.SetPieceInPlay();
+            //otherPiece.inPlay = true;
             BoardManager.instance.ActivatePiece(other.GetComponent<Piece>(), locationData);
         }
     }

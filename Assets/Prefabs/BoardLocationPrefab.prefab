@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1276341055755479585}
   - component: {fileID: 2365135738999279014}
   m_Layer: 0
-  m_Name: BoardLocation
+  m_Name: BoardLocationPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

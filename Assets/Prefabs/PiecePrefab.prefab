@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5323558285848819595}
   - component: {fileID: 103250780825051621}
   m_Layer: 0
-  m_Name: Piece
+  m_Name: PiecePrefab
   m_TagString: Piece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,9 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96bd06688f4e4db998073ccf612034d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalPiece: 1
+  matchingCard: {fileID: 0}
+  spriteRenderer: {fileID: 3299843895427967443}
   inPlay: 0
   isDragging: 0
+  pieceOwner: 0
+  pieceEffects:
+    NormalPiece: 0
 --- !u!114 &5387429923469027820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,12 +111,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 99379174070076273, guid: 224af5e4c8fb27a45b08c72dc6c70a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -180,4 +184,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

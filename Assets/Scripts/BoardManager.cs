@@ -9,7 +9,6 @@ public class BoardManager : MonoBehaviour
     public static BoardManager instance {get ; private set;}
     
     private List<BoardLocation> boardLocations = new();
-    //private BoardLocationData[,] boardData;
     
     public GameObject boardLocationPrefab;
 
@@ -58,6 +57,7 @@ public class BoardManager : MonoBehaviour
     // This is for taking control of the piece, stopping physics and animating it dropping
     public void ActivatePiece(Piece piece, BoardLocationData data)
     {
+        // TODO: If piece is dropped stop player from being able to play more this turn
         Rigidbody2D rb = piece.gameObject.GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -74,11 +74,7 @@ public class BoardManager : MonoBehaviour
 
         piece.transform.DOMove(dropWorldLocation, duration)
             .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-                SwitchTurn();
-                Debug.Log("Piece has landed.");
-            });
+            .OnComplete(SwitchTurn);
         
         dropLocation.locationData.Occupied = true;
     }

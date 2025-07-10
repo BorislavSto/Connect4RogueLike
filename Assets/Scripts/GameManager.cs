@@ -28,11 +28,6 @@ public class GameManager : MonoBehaviour
         BoardManager.instance.StartBoard(boardSize);
     }
 
-    void Update()
-    {
-        
-    }
-    
     public void SwitchTurn()
     {
         StartCoroutine(SwitchTurnCo());
@@ -42,10 +37,9 @@ public class GameManager : MonoBehaviour
     {
         while (animationPlaying)
             yield return null;
-        
+
         currentTurn = currentTurn == CurrentTurn.Player ? CurrentTurn.AI : CurrentTurn.Player;
-        
-        Debug.Log(currentTurn);
+        EventManager.InvokeTurnSwitch(currentTurn);
     }
 
     private void SetFirstTurn(CurrentTurn firstTurn)
