@@ -56,7 +56,5 @@ public class PieceMouseControls : MonoBehaviour
     private void OnMouseUp()
     {
         piece.isDragging = false;
-
-        Debug.Log("Piece dropped");
     }
 }

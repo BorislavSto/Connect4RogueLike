@@ -1,14 +1,10 @@
 ﻿using System;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    [HideInInspector]
-    public PieceCardUI matchingCard;
-    
-    [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    [HideInInspector] public PieceCardUI matchingCard;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     
     public bool inPlay;
     public bool isDragging;
@@ -17,7 +13,6 @@ public class Piece : MonoBehaviour
     public PieceEffects pieceEffects;
     
     private PieceAndCardManager pieceAndCardManager;
-    
     
     public void SetupPiece(PieceOwner owner, PieceCardUI card, PieceEffects effect)
     {
@@ -35,7 +30,15 @@ public class Piece : MonoBehaviour
             }
             else
             {
-                spriteRenderer.sprite = TextureManager.instance.breakCirlcePiece;
+                switch (effect.Effect)
+                {
+                    case SpecialEffect.DestoryAround:
+                        spriteRenderer.sprite = TextureManager.instance.breakCirlcePiece;
+                        break;
+                    default:
+                        spriteRenderer.sprite = TextureManager.instance.breakCirlcePiece;
+                        break;
+                }
             }
         }
 
@@ -55,9 +58,9 @@ public class Piece : MonoBehaviour
             ShowCard();
     }
 
-    public void SetPieceEffects(PieceEffects effects)
+    private void SetPieceEffects(PieceEffects effects)
     {
-        
+       
     }
 
     public void ShowPiece()
@@ -83,6 +86,9 @@ public class Piece : MonoBehaviour
     public void SetPieceInPlay()
     {
         inPlay = true;
+        if (matchingCard == null)
+            return;
+        
         matchingCard.gameObject.SetActive(true);
         matchingCard.PiecePlayed();
     }
@@ -94,6 +100,12 @@ public struct PieceEffects
 {
     [SerializeField]
     public bool NormalPiece;
+    public SpecialEffect Effect;
+}
+
+public enum SpecialEffect
+{
+    DestoryAround,
 }
 
 public enum PieceOwner

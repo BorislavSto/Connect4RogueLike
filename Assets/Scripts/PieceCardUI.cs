@@ -85,8 +85,6 @@ public class PieceCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             ShowPiece();
     }
 
-    // Don't spawn a piece right then and there, one should be made with the card, when moving they should appear disappear etc.
-    // Would save on instantiating and so on, only destroy the card if the piece is played
     private void ShowPiece()
     {
         if (!matchingPiece)
@@ -108,7 +106,6 @@ public class PieceCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         GameObject pieceObj = Instantiate(piecePrefab, Vector3.zero, Quaternion.identity);
         Piece piece = pieceObj.GetComponent<Piece>();
         piece.SetupPiece(pieceAndCardData.owner, this, pieceAndCardData.effect);
-        piece.SetPieceEffects(pieceAndCardData.effect);
 
         matchingPiece = piece;
     }

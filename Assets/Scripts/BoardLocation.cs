@@ -22,17 +22,21 @@ public class BoardLocation : MonoBehaviour
                 return;
 
             otherPiece.SetPieceInPlay();
-            //otherPiece.inPlay = true;
             BoardManager.instance.ActivatePiece(other.GetComponent<Piece>(), locationData);
         }
     }
 
-    public bool GetIsOccupied() => locationData.Occupied;
+    private void PlayVFXLocation()
+    {
+        
+    }
 }
 
+[Serializable]
 public struct BoardLocationData
 {
     public Vector2 Position;
     public Vector2 WorldPosition;
     public bool Occupied;
+    public Piece Piece;
 }

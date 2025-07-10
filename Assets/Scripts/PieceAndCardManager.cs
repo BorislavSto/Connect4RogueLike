@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -17,14 +18,30 @@ public class PieceAndCardManager : MonoBehaviour
     {
         deckSystem.InitializeDeck();
         StartCoroutine(InitialDraw());
-        DrawCard();
+    }
+    
+    private void OnEnable()
+    {
+        EventManager.TurnSwitch += OnPlayerTurn;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.TurnSwitch -= OnPlayerTurn;
+    }
+
+    private void OnPlayerTurn(CurrentTurn turn)
+    {
+        if (turn == CurrentTurn.Player)
+            DrawCard();
     }
 
     private void DrawCard()
     {
         DrawCardToHand();
+        EventManager.InvokeUpdateCards(deckSystem.drawPile.Count);
     }
-    
+
     private IEnumerator InitialDraw()
     {
         for (int i = 0; i < startingHandSize; i++)
@@ -32,8 +49,10 @@ public class PieceAndCardManager : MonoBehaviour
             DrawCardToHand();
             yield return new WaitForSeconds(0.1f);
         }
+
+        EventManager.InvokeUpdateCards(deckSystem.drawPile.Count);
     }
-    
+
     private void DrawCardToHand()
     {
         if (handCards.Count >= handLimit) return;
