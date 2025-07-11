@@ -49,6 +49,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e13035296a47f5a74e011e2de87fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vfxPrefab: {fileID: 286362176787450229, guid: eab9640b1c6501b4ba0d366800e1ecee, type: 3}
+  locationData:
+    Position: {x: 0, y: 0}
+    WorldPosition: {x: 0, y: 0}
+    Occupied: 0
+    Piece: {fileID: 0}
 --- !u!212 &944952287169746202
 SpriteRenderer:
   m_ObjectHideFlags: 0

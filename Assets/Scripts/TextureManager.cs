@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class TextureManager : MonoBehaviour
 {
-    public static TextureManager instance {get; private set; }
+    public static TextureManager instance { get; private set; }
 
-     public Sprite simplePlayerPiece;
-     public Sprite simpleAIPiece;
-     public Sprite breakCirlcePiece;
-     
+    public Sprite simplePlayerPiece;
+    public Sprite simpleAIPiece;
+    public Sprite breakCirlcePiece;
 
     private void Awake()
     {
@@ -17,7 +15,7 @@ public class TextureManager : MonoBehaviour
             Destroy(this);
         }
         else
-        { 
+        {
             instance = this;
         }
     }

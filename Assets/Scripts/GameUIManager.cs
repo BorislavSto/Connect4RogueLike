@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +6,10 @@ public class GameUIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI MainTextObject;
     [SerializeField] private TextMeshProUGUI CardsTextObject;
+    [SerializeField] private float fadeDuration = 0.2f;
+    [SerializeField] private float visibleDuration = 1f;
     
     private Tween currentTween;
-    private float fadeDuration = 0.2f;
-    private float visibleDuration = 1f;
     
     private void OnEnable()
     {

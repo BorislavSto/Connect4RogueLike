@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour
 {
     public static BoardManager instance {get ; private set;}
     
-    public GameObject boardLocationPrefab;
+    [SerializeField] private GameObject boardLocationPrefab;
 
     private List<BoardLocation> boardLocations = new();
 
@@ -70,7 +70,7 @@ public class BoardManager : MonoBehaviour
         
         // Animate the piece to the correct location and switch turns
         float distance = Vector2.Distance(piece.transform.position, dropWorldLocation);
-        float speed = 3f;
+        float speed = 2f;
         float duration = distance / speed;
 
         piece.transform.DOMove(dropWorldLocation, duration)
@@ -81,7 +81,7 @@ public class BoardManager : MonoBehaviour
                 {
                     switch (piece.pieceEffects.Effect)
                     {
-                        case SpecialEffect.DestoryAround:
+                        case SpecialEffect.DestroyAround:
                             DestroyPiecesAround(dropLocation.locationData.Position);
                             break;
                         default:
@@ -205,6 +205,7 @@ public class BoardManager : MonoBehaviour
         foreach (var loc in affected)
         {
             GameObject.Destroy(loc.locationData.Piece.gameObject);
+            loc.PlayVFXAtLocation();
             loc.locationData.Occupied = false;
             loc.locationData.Piece = null;
         }

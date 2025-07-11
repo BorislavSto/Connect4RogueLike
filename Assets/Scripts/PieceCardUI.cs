@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class PieceCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    [SerializeField] private GameObject piecePrefab;
     [HideInInspector] public PieceAndCardManager manager;
     
-    public TextMeshProUGUI titleText;
-    public TextMeshProUGUI descriptionText;
-    public Image spriteImage;
+    public PieceAndCardData pieceAndCardData { get; private set; }
+    
+    [SerializeField] private GameObject piecePrefab;
+    [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private Image spriteImage;
     
     private Piece matchingPiece;
     private Vector3 originalScale;
     private float originalY;
     private Vector2 originalPosition;
-    
-    public PieceAndCardData pieceAndCardData { get; private set; }
-
     private RectTransform rect;
     private bool inPlay;
 
@@ -119,14 +118,4 @@ public class PieceCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         rect.DOScale(originalScale, 0.3f);
         rect.DOAnchorPos(originalPosition, 0.3f).SetEase(Ease.OutQuad).OnComplete(() => { inPlay = false; });
     }
-}
-
-[System.Serializable]
-public struct PieceAndCardData
-{
-    public string title;
-    public string description;
-    public Sprite art;
-    public PieceEffects effect;
-    public PieceOwner owner;
 }

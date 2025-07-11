@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class BoardLocation : MonoBehaviour
 {
+    [SerializeField] private GameObject vfxPrefab;
+
     public BoardLocationData locationData;
-    
+
     public void Setup(BoardLocationData data)
     {
         locationData = data;
@@ -15,9 +17,9 @@ public class BoardLocation : MonoBehaviour
         if (other.CompareTag("Piece"))
         {
             Piece otherPiece = other.GetComponent<Piece>();
-            if (otherPiece.inPlay) 
+            if (otherPiece.inPlay)
                 return;
-            
+
             if (otherPiece.isDragging)
                 return;
 
@@ -25,18 +27,18 @@ public class BoardLocation : MonoBehaviour
             BoardManager.instance.ActivatePiece(other.GetComponent<Piece>(), locationData);
         }
     }
-
-    private void PlayVFXLocation()
+    
+    public void PlayVFXAtLocation()
     {
-        
-    }
-}
+        if (vfxPrefab == null)
+        {
+            Debug.LogWarning("VFX Prefab not assigned!");
+            return;
+        }
 
-[Serializable]
-public struct BoardLocationData
-{
-    public Vector2 Position;
-    public Vector2 WorldPosition;
-    public bool Occupied;
-    public Piece Piece;
+        GameObject vfxInstance = Instantiate(vfxPrefab, transform.position, Quaternion.identity);
+
+        // Destroy the VFX after 2 seconds (adjust timing as needed)
+        Destroy(vfxInstance, 2f);
+    }
 }

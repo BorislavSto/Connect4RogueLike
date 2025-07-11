@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,12 +28,30 @@ public class GameManager : MonoBehaviour
         SetFirstTurn(CurrentTurn.Player);
         BoardManager.instance.StartBoard(boardSize);
     }
-
+    
+    private void SetFirstTurn(CurrentTurn firstTurn)
+    {
+        currentTurn = firstTurn;
+        EventManager.InvokeTurnSwitch(currentTurn);
+    }
+    
     public void SwitchTurn()
     {
         StartCoroutine(SwitchTurnCo());
     }
+    
+    public void GameOver(PieceOwner owner)
+    {
+        EventManager.InvokeGameOver(currentTurn);
+        StartCoroutine(RestartGame());
+    }
 
+    private IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("BattleScene");
+    }
+    
     private IEnumerator SwitchTurnCo()
     {
         while (animationPlaying)
@@ -45,22 +62,5 @@ public class GameManager : MonoBehaviour
         EventManager.InvokeTurnSwitch(currentTurn);
     }
     
-    public void GameOver(PieceOwner owner)
-    {
-        EventManager.InvokeGameOver(currentTurn);
-    }
-    
-    private void SetFirstTurn(CurrentTurn firstTurn)
-    {
-        currentTurn = firstTurn;
-        EventManager.InvokeTurnSwitch(currentTurn);
-    }
-    
     public CurrentTurn GetCurrentTurn() => currentTurn;
-}
-
-public enum CurrentTurn
-{
-    Player,
-    AI,
 }

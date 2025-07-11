@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class Piece : MonoBehaviour
             {
                 switch (effect.Effect)
                 {
-                    case SpecialEffect.DestoryAround:
+                    case SpecialEffect.DestroyAround:
                         spriteRenderer.sprite = TextureManager.instance.breakCirlcePiece;
                         break;
                     default:
@@ -56,11 +55,6 @@ public class Piece : MonoBehaviour
         
         if (!ZonesHanlder.instance.IsInPlayZone())
             ShowCard();
-    }
-
-    private void SetPieceEffects(PieceEffects effects)
-    {
-       
     }
 
     public void ShowPiece()
@@ -92,24 +86,4 @@ public class Piece : MonoBehaviour
         matchingCard.gameObject.SetActive(true);
         matchingCard.PiecePlayed();
     }
-}
-
-// Will contain all the information to for special effects such as destroying other pieces or sideways movement
-[Serializable]
-public struct PieceEffects
-{
-    [SerializeField]
-    public bool NormalPiece;
-    public SpecialEffect Effect;
-}
-
-public enum SpecialEffect
-{
-    DestoryAround,
-}
-
-public enum PieceOwner
-{
-    Player,
-    AI,
 }

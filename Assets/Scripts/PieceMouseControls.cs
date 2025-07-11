@@ -34,15 +34,6 @@ public class PieceMouseControls : MonoBehaviour
         StartDragging();
     }
     
-    // private void OnMouseDrag()
-    // {
-    //     if (!piece.isDragging) return;
-    //
-    //     Vector3 mouseWorldPos = cam.ScreenToWorldPoint(Input.mousePosition);
-    //     Vector3 targetPos = new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0f) + offset;
-    //     transform.position = targetPos;
-    // }
-    
     public void StartDragging()
     {
         if (piece.inPlay) return;

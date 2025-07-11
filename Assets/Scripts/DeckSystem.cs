@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DeckSystem : MonoBehaviour
 {
-    public List<PieceAndCardData> fullDeck = new List<PieceAndCardData>();
-    public Queue<PieceAndCardData> drawPile = new Queue<PieceAndCardData>();
+    public List<PieceAndCardData> fullDeck = new();
+    public Queue<PieceAndCardData> drawPile = new();
     
     [HideInInspector]
-    public List<PieceAndCardData> discardPile = new List<PieceAndCardData>();
+    public List<PieceAndCardData> discardPile = new();
 
     public void InitializeDeck()
     {
